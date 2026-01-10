@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_publi_connect
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432"
+    # We don't set a volume here to avoid persisting data between restarts
+    # and we don't set a host port because we don't need it, spring boot docker compose dependency
+    # will take care of that through binding the port to a random host port
+    # And we don't set address because compose sets 0.0.0.0 by default
